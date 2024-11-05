@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLITCHX - Under Construction</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            font-size: 4em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            position: relative;
+            text-shadow: 0 0 10px #0ff;
+            animation: glitch 2s infinite;
+        }
+
+        .status {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            color: #0ff;
+            opacity: 0.8;
+        }
+
+        .progress-bar {
+            width: 300px;
+            height: 4px;
+            background: #1a1a1a;
+            border-radius: 2px;
+            margin: 20px auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress {
+            position: absolute;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, #0ff, transparent);
+            animation: progress 2s linear infinite;
+        }
+
+        .code-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.1;
+        }
+
+        @keyframes glitch {
+            0% {
+                text-shadow: 0 0 10px #0ff;
+                transform: translateX(0);
+            }
+            25% {
+                text-shadow: -2px 0 #ff0000, 2px 2px #0000ff;
+                transform: translateX(-2px);
+            }
+            50% {
+                text-shadow: 2px 0 #00ff00, -2px -2px #ff00ff;
+                transform: translateX(2px);
+            }
+            75% {
+                text-shadow: -2px 0 #ff0000, 2px 2px #0000ff;
+                transform: translateX(-2px);
+            }
+            100% {
+                text-shadow: 0 0 10px #0ff;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes progress {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        .code-svg {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="code-animation" id="codeAnimation"></div>
+
+    <div class="container">
+        <div class="logo">GLITCHX</div>
+        <div class="status">System Upgrade in Progress</div>
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+        <p>Please check back soon...</p>
+    </div>
+
+    <script>
+        function createCodeSVG() {
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute("width", "50");
+            svg.setAttribute("height", "50");
+            svg.setAttribute("viewBox", "0 0 50 50");
+            svg.setAttribute("class", "code-svg");
+
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", "M20,10 L5,25 L20,40 M30,10 L45,25 L30,40");
+            path.setAttribute("stroke", "#0ff");
+            path.setAttribute("stroke-width", "2");
+            path.setAttribute("fill", "none");
+
+            svg.appendChild(path);
+            return svg;
+        }
+
+        function addFloatingCode() {
+            const codeAnimation = document.getElementById('codeAnimation');
+
+            for(let i = 0; i < 15; i++) {
+                const svg = createCodeSVG();
+                svg.style.left = Math.random() * 100 + '%';
+                svg.style.top = Math.random() * 100 + '%';
+                svg.style.animationDelay = Math.random() * 2 + 's';
+                codeAnimation.appendChild(svg);
+            }
+        }
+
+        addFloatingCode();
+    </script>
+</body>
+</html>

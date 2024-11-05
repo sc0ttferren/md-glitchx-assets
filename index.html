@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Gallery</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            padding: 20px;
+        }
+
+        .gallery-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #333;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 10px;
+        }
+
+        .gallery-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .description {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+            padding: 5px;
+        }
+
+        .download-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 12px;
+            transition: background 0.3s;
+        }
+
+        .download-btn:hover {
+            background: rgba(0,0,0,0.9);
+        }
+
+        @media (max-width: 600px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="gallery-container"></div>
+
+    <script>
+        const galleryData = {
+            J: [
+                {filename: 'j_angy.png', desc: 'J angry'},
+                {filename: 'j_angyspeak.png', desc: 'J angry speaking'},
+                {filename: 'j_glare.png', desc: 'J glaring'},
+                {filename: 'j_reprimand.png', desc: 'J reprimanding'},
+                {filename: 'j_unimpressed.png', desc: 'J unimpressed'},
+                {filename: 'j_veryangyspeak.png', desc: 'J very angry speaking'},
+                {filename: 'j_widemouthspeak.png', desc: 'J speaking with wide mouth'},
+                {filename: 'j_writingonclipboard.png', desc: 'J writing on clipboard'}
+            ],
+            N: [
+                {filename: 'n_runninginawe.png', desc: 'N running in awe'},
+                {filename: 'n_runninginfear.png', desc: 'N running in fear'},
+                {filename: 'n_runninginglee.png', desc: 'N running in glee'},
+                {filename: 'n_showoff.png', desc: 'N showing off'},
+                {filename: 'n_surprise_smile.png', desc: 'N surprised with smile'},
+                {filename: 'n_surprise.png', desc: 'N surprised'}
+            ],
+            UZI: [
+                {filename: 'Uzi_disapproval_talk.png', desc: 'Uzi talking with disapproval'},
+                {filename: 'uzi_pose1.png', desc: 'Uzi posing'}
+            ],
+            V: [
+                {filename: 'v_eatleft_oil.png', desc: 'V eating, left side, includes oil'},
+                {filename: 'v_eatright_oil.png', desc: 'V eating, right side, includes oil'},
+                {filename: 'v_glare_arminmouth_oil.png', desc: 'V glaring with arm in mouth, includes oil'},
+                {filename: 'v_shock_holdingarm_oil.png', desc: 'V shocked holding arm, includes oil'},
+                {filename: 'v_sideeye.png', desc: 'V side eyeing'},
+                {filename: 'v_worried.png', desc: 'V worried'}
+            ]
+        };
+
+        const container = document.getElementById('gallery-container');
+
+        for (const [character, images] of Object.entries(galleryData)) {
+            const section = document.createElement('div');
+            section.className = 'gallery-section';
+
+            section.innerHTML = `
+                <h2 class="section-title">Character ${character}</h2>
+                <div class="gallery-grid">
+                    ${images.map(img => `
+                        <div class="gallery-item">
+                            <img src="assets/${character}/${img.filename}" alt="${img.desc}">
+                            <p class="description">${img.desc}</p>
+                            <a href="assets/${character}/${img.filename}"
+                               download="${img.filename}"
+                               class="download-btn">
+                                Download
+                            </a>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            container.appendChild(section);
+        }
+    </script>
+</body>
+</html>
